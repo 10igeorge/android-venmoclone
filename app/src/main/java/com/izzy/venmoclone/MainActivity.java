@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,14 +18,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-        @Bind(R.id.transactionsListView) ListView mTransactionsListView;
 
-        private String[] transactions = new String[] {
+
+    @Bind(R.id.transactionsListView) ListView mTransactionsListView;
+
+        private String[] hardCodedTransactions = new String[] {
             "Erica Perez paid Daniel Pinedo",
             "Jean-Marc Pruit paid Matt Cragg",
             "Michael Turner paid Jennifer Morris",
@@ -38,9 +44,13 @@ public class MainActivity extends AppCompatActivity
             "Haley Goble paid Matt Cragg",
             "Izzy George paid Brooke Coleman"
          };
+    public static final String TAG = MainActivity.class.getSimpleName();
+
+    ArrayList<String> transactions = new ArrayList<>(Arrays.asList(hardCodedTransactions));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -69,6 +79,23 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+            Intent intent = getIntent();
+            String recipient = intent.getStringExtra("recipient");
+            String amount = intent.getStringExtra("amount");
+            String reason = intent.getStringExtra("reason");
+            String transaction = intent.getStringExtra("transaction");
+            String addTransaction;
+            if(transaction != null){
+                if(transaction.equals("paid")){
+                    addTransaction = "Izzy George " + transaction + " " + recipient;
+                    transactions.add(addTransaction);
+                } else if (transaction.equals("charged")){
+                    addTransaction = "Izzy George " + transaction + " " + recipient;
+                    transactions.add(addTransaction);
+                }
+            }
+
 
 
     }
