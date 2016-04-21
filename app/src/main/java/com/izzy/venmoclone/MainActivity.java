@@ -12,14 +12,40 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+        @Bind(R.id.transactionsListView) ListView mTransactionsListView;
+        private String[] transactions = new String[] {
+            "Erica Perez paid Daniel Pinedo",
+            "Jean-Marc Pruit paid Matt Cragg",
+            "Michael Turner paid Jennifer Morris",
+            "Ryan Coe paid John Connolly",
+            "Taylor Matthews paid Samantha Matthews",
+            "Jessie Rump charged Kirsten Fields",
+            "Liz George paid Izzy George",
+            "Mike Pieratt charged Nghi Nguyen",
+            "David Murguia charged Rebeca Murguia",
+            "Michael Rasbury paid Jessie Rump",
+            "Haley Goble paid Matt Cragg",
+            "Izzy George paid Brooke Coleman"
+         };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, transactions);
+        mTransactionsListView.setAdapter(adapter);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -40,6 +66,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
     @Override

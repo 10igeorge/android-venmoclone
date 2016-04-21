@@ -11,7 +11,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.epicodus.myrestaurants"
+        applicationId "com.izzy.venmoclone"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
