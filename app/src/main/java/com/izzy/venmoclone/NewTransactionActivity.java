@@ -54,3 +54,8 @@ public class NewTransactionActivity extends AppCompatActivity implements View.On
         }
     }
 }
+
+
+//TODO: implement fragments
+//TODO:Make list items bigger with comment/like/timestamp/publicview
+//TODO:Choose privacy on transaction creation
